@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
-    login _login = new login();
+    Login _login = new Login();
     /**
      * Creates new form Menu
      * @param entrar
      */
-    public Menu(login entrar) {
+    public Menu(Login entrar) {
         initComponents();
         _login = entrar;
         this.setLocationRelativeTo(null);
@@ -178,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new Menu(login inicio= new login()).setVisible(true);
+               // new Menu(Login inicio= new Login()).setVisible(true);
             }
         });
     }
