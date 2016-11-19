@@ -15,12 +15,13 @@ import javax.swing.JOptionPane;
  * @author Miguel Lopez
  */
 public class Registrar_Usuario extends javax.swing.JFrame {
-
+ login _login = new login();
     /**
      * Creates new form Registrar_Usuario
      */
-    public Registrar_Usuario() {
+    public Registrar_Usuario(login entrar) {
         initComponents();
+        _login= entrar;
         this.setLocationRelativeTo(null);
     }
 
@@ -242,7 +243,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registrar_Usuario().setVisible(true);
+                
             }
         });
     }
