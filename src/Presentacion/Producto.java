@@ -41,7 +41,6 @@ public class Producto extends javax.swing.JFrame {
         BtnCancel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         BtnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,8 +74,6 @@ public class Producto extends javax.swing.JFrame {
         jLabel2.setText("Productos");
 
         BtnDelete.setText("Borrar");
-
-        jButton1.setText("Insertar Proveedor");
 
         jButton2.setText("Insertar Producto");
 
@@ -125,11 +122,6 @@ public class Producto extends javax.swing.JFrame {
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(178, 178, 178)
-                    .addComponent(jButton1)
-                    .addContainerGap(178, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,11 +151,6 @@ public class Producto extends javax.swing.JFrame {
                     .addComponent(BtnDelete)
                     .addComponent(BtnCancel))
                 .addGap(20, 20, 20))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(206, 206, 206)
-                    .addComponent(jButton1)
-                    .addContainerGap(217, Short.MAX_VALUE)))
         );
 
         jLabel4.getAccessibleContext().setAccessibleName("precio unitario");
@@ -211,7 +198,6 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JButton BtnDelete;
     private javax.swing.JButton BtnSave;
     private java.awt.Choice choice1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
