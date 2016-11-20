@@ -11,10 +11,12 @@ package Presentacion;
  */
 public class Producto extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form Producto
      */
-    public Producto() {
+    public Producto(Menu menu,Integer id) {
+        
         initComponents();
     }
 
@@ -43,7 +45,7 @@ public class Producto extends javax.swing.JFrame {
         BtnDelete = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,7 +190,7 @@ public class Producto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Producto().setVisible(true);
+              //  new Producto().setVisible(true);
             }
         });
     }

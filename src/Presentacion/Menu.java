@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
 
     Login _login = new Login();
+    Integer _id = 0;
     /**
      * Creates new form Menu
      * @param entrar
@@ -22,6 +23,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         _login = entrar;
         String nombre= usuario.Nombre + " "+ usuario.Apellido ;
+        _id=usuario.Id;
         lblNombre.setText(nombre);
         this.setLocationRelativeTo(null);
     }
@@ -36,8 +38,10 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Btn_Usuario = new javax.swing.JButton();
+        Btn_productos = new javax.swing.JButton();
+        Btn_Proveedor = new javax.swing.JButton();
+        Btn_Rproducto = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -51,34 +55,53 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("registrar usuarios");
+        Btn_Usuario.setText("Control de usuarios");
+        Btn_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_UsuarioActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("control de productos");
+        Btn_productos.setText("Productos");
+        Btn_productos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_productosActionPerformed(evt);
+            }
+        });
+
+        Btn_Proveedor.setText("Proveedores");
+
+        Btn_Rproducto.setText("Registro de Productos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(147, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(Btn_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(Btn_productos)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_Rproducto)
+                    .addComponent(Btn_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblNombre)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_Usuario)
+                    .addComponent(Btn_Proveedor))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_productos)
+                    .addComponent(Btn_Rproducto))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Menu");
@@ -103,16 +126,21 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap())
         );
 
         pack();
@@ -138,6 +166,17 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         }        
     }//GEN-LAST:event_jbtnCloseActionPerformed
+
+    private void Btn_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_UsuarioActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_UsuarioActionPerformed
+
+    private void Btn_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_productosActionPerformed
+    Producto producto = new Producto(this,_id);
+    producto.setVisible(true);
+    this.setVisible(false);
+    }//GEN-LAST:event_Btn_productosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,8 +214,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Btn_Proveedor;
+    private javax.swing.JButton Btn_Rproducto;
+    private javax.swing.JButton Btn_Usuario;
+    private javax.swing.JButton Btn_productos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
