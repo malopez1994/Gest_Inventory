@@ -7,9 +7,10 @@ import java.sql.*;
  *
  * @author Miguel Lopez
  */
-public class Validacion_Usuarios {
+public class UsuariosData {
     static Connection con;
     static PreparedStatement pst;
+    static Statement st;
     static ResultSet rs;
     public static void conectar()
    {
@@ -27,7 +28,7 @@ public class Validacion_Usuarios {
     { 
      try 
      {
-     Usuarios user = new Usuarios();
+     Usuarios user = null;
         conectar();
             if(type == "Usuario")
             {
@@ -43,6 +44,7 @@ public class Validacion_Usuarios {
        
        while(rs.next())
        {
+       user = new Usuarios();
        user.Id =Integer.parseInt(rs.getObject(1).toString());
        if( rs.getObject(2)==null)
        {
@@ -65,11 +67,38 @@ public class Validacion_Usuarios {
        
     //   _user = new Usuarios(Integer.parseInt(rs.getObject(1).toString()), rs.getObject(2).toString(), rs.getObject(3).toString(), rs.getObject(4).toString(), rs.getObject(5).toString());
      }
+     
      return user;
      }
          catch (SQLException | NumberFormatException e) {
             return null;
         }
-    }}
+    }
+    
+    public boolean crear_usuario(Usuarios User) throws SQLException
+    {
+    try
+    {
+      conectar();
+      if(User.Tipo == "Usuario")
+      {
+        User.Tipo = "Usr";
+      }
+      else
+      {
+        User.Tipo = "Adm";
+      }
+      String query = "Insert Into USUARIOS (ID,NOMBRE,APELLIDO,USUARIO,CONTRASEÑA,TIPO_USUARIO,FECHA,ESTADO) values("+ User.Id +",'"+ User.Nombre + "','"+ User.Apellido +"','"+ User.Usuario +"','"+ User.Contraseña +"','"+ User.Tipo +"',SYSDATE,1)";
+      st = con.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
+      st.executeUpdate(query);
+      st.close();
+      return true; 
+    }
+    catch(NumberFormatException e)
+    {
+      return false;
+    }
+    }
+}
     
 

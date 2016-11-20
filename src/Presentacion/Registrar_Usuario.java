@@ -1,8 +1,14 @@
 package Presentacion;
 
 
+import Class_GI.UsuariosData;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +24,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
  Login _login = new Login();
     /**
      * Creates new form Registrar_Usuario
+     * 
      */
     public Registrar_Usuario(Login entrar) {
         initComponents();
@@ -47,8 +54,14 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         cb_tipo = new javax.swing.JComboBox<>();
         btn_registrar = new javax.swing.JButton();
         txt_pass = new javax.swing.JPasswordField();
+        btn_cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         txt_id.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -86,7 +99,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo");
 
-        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Invitado", "Administrador" }));
+        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Administrador" }));
 
         btn_registrar.setText("Registrar");
         btn_registrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,16 +114,30 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             }
         });
 
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cancelarMouseClicked(evt);
+            }
+        });
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_registrar)
-                        .addGap(123, 123, 123))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_cancelar)
+                        .addGap(77, 77, 77))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -125,7 +152,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(6, 6, 6)
                                 .addComponent(txt_pass)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +193,9 @@ public class Registrar_Usuario extends javax.swing.JFrame {
                     .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addComponent(btn_registrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_registrar)
+                    .addComponent(btn_cancelar))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -174,7 +203,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyTyped
-    if(txt_id.getText().length()>=15 || evt.getKeyChar()== KeyEvent.VK_SPACE )
+    if(txt_id.getText().length()>=15 || evt.getKeyChar()== KeyEvent.VK_SPACE || !Character.isDigit(evt.getKeyChar()))
     {
     evt.consume();
     }        // TODO add your handling code here:
@@ -209,9 +238,66 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_passKeyTyped
 
     private void btn_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registrarMouseClicked
-        String pass = JOptionPane.showInputDialog("Confirmar Autorizacion del Administrador:");
-        
+        try {
+        UsuariosData s = new UsuariosData();
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Confirmar Autorizacion del Administrador:");
+        JPasswordField pass = new JPasswordField(10);
+        panel.add(label);
+        panel.add(pass);
+        String[] options = new String[]{"Aceptar", "Cancelar"};
+        int option = JOptionPane.showOptionDialog(null, panel, "Validacion",
+                         JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                         null, options, options[1]);
+        if(option == 0) // pressing OK button
+        {
+            char[] password = pass.getPassword();
+            String _pass = new String(password);
+            Modelos.Usuarios user = null;
+            user = s.validar_usuario("Administrador",_pass,"Adm");
+            if(user!=null)
+            {
+                user.Id=Integer.parseInt(txt_id.getText());
+                user.Nombre = txt_nombre.getText();
+                user.Apellido= txt_apellido.getText();
+                user.Usuario=txt_usuario.getText();
+                user.Contraseña=new String(txt_pass.getPassword());
+                user.Tipo=cb_tipo.getName();
+            }
+            boolean valide = false;
+            valide = s.crear_usuario(user);
+            if(valide)
+            {
+                 JOptionPane.showMessageDialog(null,"Usuario Creado","mensaje de validacion",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+            JOptionPane.showMessageDialog(null,"No es valido la contraseña","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+        }
+        }
+        }
+        catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(null,"Error en la insercion","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_btn_registrarMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    _login.setVisible(true);   
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelarMouseClicked
+    _login.setVisible(true);   
+    this.dispose();        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btn_cancelarMouseClicked
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+     _login.setVisible(true);   
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 /**/
     /**
      * @param args the command line arguments
@@ -249,6 +335,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_registrar;
     private javax.swing.JComboBox<String> cb_tipo;
     private javax.swing.JLabel jLabel1;

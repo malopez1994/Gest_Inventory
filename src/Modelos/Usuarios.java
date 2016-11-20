@@ -9,6 +9,7 @@ public class Usuarios {
      public String Nombre;
      public String Apellido;
      public String Usuario;
+     public String Contraseña;
      public String Tipo;
 
     public Integer getId() {
