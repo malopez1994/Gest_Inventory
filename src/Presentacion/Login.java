@@ -193,7 +193,7 @@ public class Login extends javax.swing.JFrame {
         user = s.validar_usuario(txt_usuario.getText(),pass,cb_tipo.toString());
         if(user != null)
         {
-        Menu new_menu = new Menu(this) ;
+        Menu new_menu = new Menu(this,user) ;
         
         new_menu.setVisible(true);
         this.setVisible(false);
