@@ -18,7 +18,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */
-    public Login() {
+    public Login() { 
+        
         initComponents();
         this.setLocationRelativeTo(null);
     }
