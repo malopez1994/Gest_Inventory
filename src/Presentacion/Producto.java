@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import Class_GI.ProveedorData;
+import sun.font.GlyphLayout;
+
 /**
  *
  * @author Miguel Lopez
@@ -18,6 +21,8 @@ public class Producto extends javax.swing.JFrame {
     public Producto(Menu menu,Integer id) {
         
         initComponents();
+        ProveedorData Pdata;
+        
     }
 
     /**
