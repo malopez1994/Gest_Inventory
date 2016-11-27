@@ -55,11 +55,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Usuario");
 
         btn_entrar.setText("Ingresar");
-        btn_entrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_entrarMouseClicked(evt);
-            }
-        });
         btn_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_entrarActionPerformed(evt);
@@ -98,27 +93,27 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(BtnNuevo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_usuario)
+                    .addComponent(txt_pass)
+                    .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_usuario)
-                            .addComponent(txt_pass)
-                            .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19)
+                        .addComponent(BtnNuevo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addGap(153, 153, 153)
                         .addComponent(btn_entrar)))
-                .addGap(90, 90, 90))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +130,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btn_entrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(BtnNuevo)
                 .addContainerGap())
         );
@@ -146,6 +141,39 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
+try {
+        UsuariosData s = new UsuariosData();
+        if(txt_usuario.getText().length() == 0)
+        {
+        JOptionPane.showMessageDialog(null,"No se puede dejar en blanco el usuario","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+        return;
+        } 
+        else if(txt_pass.getPassword().length == 0)
+        {
+        JOptionPane.showMessageDialog(null,"No se puede dejar en blanco la contraseña","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        char[] convert_pass = txt_pass.getPassword();
+        String pass = new String(convert_pass);
+        Modelos.Usuarios user = null;
+        String tipo= cb_tipo.getSelectedItem().toString();
+        user = s.validar_usuario(txt_usuario.getText(),pass,tipo);
+        if(user != null)
+        {
+        Menu new_menu = new Menu(this,user) ;
+        
+        new_menu.setVisible(true);
+        this.setVisible(false);
+        }
+        else
+        {
+        JOptionPane.showMessageDialog(null,"El usuario y la contraseña no son validos. Digite nuevamente","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+        }
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(null,"Error del sistema consulte con el administrador","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
+
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_entrarActionPerformed
 
@@ -174,44 +202,6 @@ public class Login extends javax.swing.JFrame {
          evt.consume();
         }// TODO add your handling code here:
     }//GEN-LAST:event_txt_usuarioKeyPressed
-
-    private void btn_entrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_entrarMouseClicked
-        try {
-        UsuariosData s = new UsuariosData();
-        if(txt_usuario.getText().length() == 0)
-        {
-        JOptionPane.showMessageDialog(null,"No se puede dejar en blanco el usuario","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
-        return;
-        } 
-        else if(txt_pass.getPassword().length == 0)
-        {
-        JOptionPane.showMessageDialog(null,"No se puede dejar en blanco la contraseña","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
-        return;
-        }
-        char[] convert_pass = txt_pass.getPassword();
-        String pass = new String(convert_pass);
-        Modelos.Usuarios user = null;
-        user = s.validar_usuario(txt_usuario.getText(),pass,cb_tipo.toString());
-        if(user != null)
-        {
-        Menu new_menu = new Menu(this,user) ;
-        
-        new_menu.setVisible(true);
-        this.setVisible(false);
-        }
-        else
-        {
-        JOptionPane.showMessageDialog(null,"No es correcto","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
-        }
-        } catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null,"No es correcto","mensaje de validacion",JOptionPane.ERROR_MESSAGE);
-
-        }
-           
-        
-        
-    }//GEN-LAST:event_btn_entrarMouseClicked
 
     private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
       Registrar_Usuario new_registro = new Registrar_Usuario(this) ;
