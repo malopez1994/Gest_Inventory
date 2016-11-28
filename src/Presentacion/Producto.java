@@ -21,6 +21,7 @@ public class Producto extends javax.swing.JFrame {
 
     ArrayList<Proveedores> listaProveedor = new ArrayList<Proveedores>();
     Menu_Administrador _menu;
+    int _id=0;
     
     public Producto(Menu_Administrador menu,Integer id) {
         _menu=menu;

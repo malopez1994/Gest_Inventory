@@ -79,6 +79,11 @@ public class Menu_Administrador extends javax.swing.JFrame {
         Btn_Proveedor.setText("Proveedores");
         Btn_Proveedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Btn_Proveedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Btn_Proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ProveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,7 +150,7 @@ public class Menu_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-            Object[] opciones = {"Aceptar","Cancelar"};
+        Object[] opciones = {"Aceptar","Cancelar"};
         int validar = JOptionPane.showOptionDialog(rootPane, "¿Desea cerrar sesion?","Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");   // TODO add your handling code here:
         if(validar==JOptionPane.YES_OPTION)
         {
@@ -175,6 +180,12 @@ public class Menu_Administrador extends javax.swing.JFrame {
     producto.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_Btn_productosActionPerformed
+
+    private void Btn_ProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ProveedorActionPerformed
+    Proveedor proveedor = new Proveedor(this,_id);
+    proveedor.setVisible(true);
+    this.setVisible(false);            // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_ProveedorActionPerformed
 
     /**
      * @param args the command line arguments

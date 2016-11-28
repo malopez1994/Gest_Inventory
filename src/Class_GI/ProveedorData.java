@@ -9,6 +9,7 @@ import static Class_GI.UsuariosData.conectar;
 import static Class_GI.UsuariosData.pst;
 import Modelos.Proveedores;
 import Modelos.Usuarios;
+import Presentacion.Proveedor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -68,5 +69,10 @@ public class ProveedorData {
             return null;
         }
     }
-    
+    public boolean Crear_Proveedor(Proveedor _proveedor)
+    {
+        
+    conectar();
+    return false;
+    }
 }

@@ -5,17 +5,21 @@
  */
 package Presentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Miguel Lopez
  */
 public class Proveedor extends javax.swing.JFrame {
     Menu_Administrador _menu;
+    int _id=0;
     /**
      * Creates new form Proveedor
      */
     public Proveedor(Menu_Administrador menu,Integer id) {
          _menu=menu;
+         _id=id;
         initComponents();
         txtCorreo.setEnabled(false);
         txtDireccion.setEnabled(false);
@@ -111,6 +115,11 @@ public class Proveedor extends javax.swing.JFrame {
         btnGuardar.setText("Guardar");
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Imagenes/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -252,6 +261,15 @@ public class Proveedor extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Object[] opciones = {"Aceptar","Cancelar"};
+        int validar = JOptionPane.showOptionDialog(rootPane, "¿Desea cerrar sesion?","Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");   // TODO add your handling code here:
+        if(validar==JOptionPane.YES_OPTION)
+        {
+        
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
