@@ -45,11 +45,15 @@ public class ProveedorData {
      try 
      {
        conectar();
-       ArrayList<Proveedores> ListProveedor = new ArrayList<Proveedores>() ;
+       ArrayList<Proveedores> ListProveedor = null;
        String query = "select id,nombre from proveedores";
        pst = con.prepareStatement(query);
        rs = pst.executeQuery();
        Proveedores proveedor;
+       if(rs.getRow()>0)
+       {
+           ListProveedor=new ArrayList<Proveedores>();
+       }
        while(rs.next())
        {
            proveedor= new Proveedores();

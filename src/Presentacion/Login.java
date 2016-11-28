@@ -99,11 +99,12 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_usuario)
-                    .addComponent(txt_pass)
-                    .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_pass)
+                        .addComponent(cb_tipo, 0, 126, Short.MAX_VALUE)))
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,10 +161,17 @@ try {
         user = s.validar_usuario(txt_usuario.getText(),pass,tipo);
         if(user != null)
         {
-        Menu new_menu = new Menu(this,user) ;
-        
-        new_menu.setVisible(true);
-        this.setVisible(false);
+            if(tipo=="Usuario")
+            {
+            Menu_Usuario new_menu = new Menu_Usuario(this,user);
+            new_menu.setVisible(true);
+            this.setVisible(false);
+            }else
+            {
+            Menu_Administrador new_menu = new Menu_Administrador(this,user) ;
+            new_menu.setVisible(true);
+            this.setVisible(false);
+            }
         }
         else
         {
